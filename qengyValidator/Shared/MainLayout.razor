@@ -1,0 +1,33 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider Theme="CustomTheme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="0">
+        <MudLink Href="/"><MudImage Src="imgs/biglogo.png" Height="40" Alt="qengy"/></MudLink>
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Filled.CorporateFare" Color="Color.Dark" Edge="Edge.Start" Style="margin: 10px;" Link="https://github.com/qengy" />
+        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Dark" Edge="Edge.Start" Style="margin: 10px;" Link="https://github.com/qengy/qengyValidator" />
+    </MudAppBar>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+<MudScrollToTop>
+    <MudFab Color="Color.Primary" Icon="@Icons.Filled.KeyboardDoubleArrowUp" />
+</MudScrollToTop>
+
+@code{
+    MudTheme CustomTheme = new MudTheme()
+    {
+        Palette = new Palette()
+        {
+            Primary = "#FFC000",
+            Secondary = Colors.Shades.White,
+            AppbarBackground = Colors.Shades.White,
+        }
+    };
+}

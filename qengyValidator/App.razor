@@ -1,0 +1,15 @@
+﻿<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <PageTitle>qengy - Not found</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <MudContainer Class="py-5 px-5 mud-secondary">
+                <MudText Typo="Typo.h5" Align="Align.Center" Class="pb-5"><b>404 - Not Found</b></MudText>
+                <MudImage Fluid="true" Src="imgs/notfound-1.png"></MudImage>
+            </MudContainer>
+        </LayoutView>
+    </NotFound>
+</Router>
