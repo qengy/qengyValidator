@@ -37,7 +37,7 @@ namespace qengyValidator.Library
         /// Function that validate the document is valid
         /// </summary>
         /// <param name="document">Document</param>
-        /// <returns>Document Type</returns>
+        /// <returns>Tuple of Document Type and Boolean</returns>
         public (DocTypes,bool) ValidateDocument(string document)
         {
             document = document.Replace(" ", "").ToUpper();
@@ -49,6 +49,25 @@ namespace qengyValidator.Library
                 case DocTypes.CIF: return (docType, ValidCIF(document));
                 default: return (docType, false);
             }
+        }
+
+        /// <summary>
+        /// Function that calculate the NIF control letter
+        /// </summary>
+        /// <param name="document">Document</param>
+        /// <returns>Tuple of Document Type and String</returns>
+        public (DocTypes, string) CalculateControlNIF(string document)
+        {
+            document = document.Replace(" ", "").ToUpper();
+            string patternNIF = @"^[0-9]{8}$";
+            Regex regexNIF = new Regex(patternNIF);
+            if (regexNIF.IsMatch(document))
+            {
+                string sequenceNIF = "TRWAGMYFPDXBNJZSQVHLCKE";
+                int i = int.Parse(document.Substring(0, 8)) % 23;
+                return (DocTypes.NIF, sequenceNIF[i].ToString());
+            }
+            else return (DocTypes.NO_VALID_DOC, "");
         }
 
         /// <summary>

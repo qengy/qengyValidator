@@ -50,6 +50,24 @@
         </MudItem>
     </MudGrid>
     <MudDivider />
+        <MudGrid Class="py-5">
+        <MudItem xs="12" sm="12" md="4" Class="d-flex align-center">
+            <MudPaper Elevation="0" Class="mud-width-full">
+                <MudText>Function that calculate the NIF control letter</MudText>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="12" md="4">
+            <MudPaper Elevation="0" Class="mud-width-full">
+                <MudTextField @bind-Value="VTIN_CCN_Document" Label="Document" Variant="Variant.Outlined" FullWidth="true" TextChanged="VTIN_CCN_Text_Changed"></MudTextField>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="12" md="4" Class="d-flex align-center">
+            <MudPaper Elevation="0" Class="mud-width-full">
+                <MudText>@VTIN_CCN_Response</MudText>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+    <MudDivider />
 </MudContainer>
 
 <div Class="py-10 px-5 mud-theme-primary">
@@ -63,6 +81,8 @@
     public string? VTIN_GDT_Response { get; set; }
     public string? VTIN_VD_Document { get; set; }
     public string? VTIN_VD_Response { get; set; }
+    public string? VTIN_CCN_Document { get; set; }
+    public string? VTIN_CCN_Response { get; set; }
 
 
     void VTIN_GDT_Text_Changed()
@@ -77,5 +97,11 @@
         var ret = cls.ValidateDocument(VTIN_VD_Document);
         VTIN_VD_Response = "Type: "  + ret.Item1.ToString() + " - Valid: " + ret.Item2.ToString();
     }
-
+    
+    void VTIN_CCN_Text_Changed()
+    {
+        clsValidateTaxIdentificationNumber cls = new clsValidateTaxIdentificationNumber();
+        var ret = cls.CalculateControlNIF(VTIN_CCN_Document);
+        VTIN_CCN_Response = "Type: "  + ret.Item1.ToString() + " - Letter Control: " + ret.Item2.ToString();
+    }
 }
