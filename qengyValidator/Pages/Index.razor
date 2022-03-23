@@ -22,12 +22,30 @@
         </MudItem>
         <MudItem xs="12" sm="12" md="4">
             <MudPaper Elevation="0" Class="mud-width-full">
-                <MudTextField @bind-Value="VTIN_Document" Label="Document" Variant="Variant.Outlined" FullWidth="true" TextChanged="VTIN_GDT_Text_Changed"></MudTextField>
+                <MudTextField @bind-Value="VTIN_GDT_Document" Label="Document" Variant="Variant.Outlined" FullWidth="true" TextChanged="VTIN_GDT_Text_Changed"></MudTextField>
             </MudPaper>
         </MudItem>
         <MudItem xs="12" sm="12" md="4" Class="d-flex align-center">
             <MudPaper Elevation="0" Class="mud-width-full">
                 <MudText>@VTIN_GDT_Response</MudText>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+    <MudDivider />
+    <MudGrid Class="py-5">
+        <MudItem xs="12" sm="12" md="4" Class="d-flex align-center">
+            <MudPaper Elevation="0" Class="mud-width-full">
+                <MudText>Function that based on the regex of document returns the type of document and indicate if it is valid</MudText>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="12" md="4">
+            <MudPaper Elevation="0" Class="mud-width-full">
+                <MudTextField @bind-Value="VTIN_VD_Document" Label="Document" Variant="Variant.Outlined" FullWidth="true" TextChanged="VTIN_VD_Text_Changed"></MudTextField>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="12" md="4" Class="d-flex align-center">
+            <MudPaper Elevation="0" Class="mud-width-full">
+                <MudText>@VTIN_VD_Response</MudText>
             </MudPaper>
         </MudItem>
     </MudGrid>
@@ -41,13 +59,23 @@
 </div>
 
 @code {
-    public string VTIN_Document { get; set; }
-    public string VTIN_GDT_Response { get; set; }
+    public string? VTIN_GDT_Document { get; set; }
+    public string? VTIN_GDT_Response { get; set; }
+    public string? VTIN_VD_Document { get; set; }
+    public string? VTIN_VD_Response { get; set; }
+
 
     void VTIN_GDT_Text_Changed()
     {
         clsValidateTaxIdentificationNumber cls = new clsValidateTaxIdentificationNumber();
-        VTIN_GDT_Response = cls.GetDocumentType(VTIN_Document).ToString();
+        VTIN_GDT_Response = "Type: "  + cls.GetDocumentType(VTIN_GDT_Document).ToString();
+    }
+
+    void VTIN_VD_Text_Changed()
+    {
+        clsValidateTaxIdentificationNumber cls = new clsValidateTaxIdentificationNumber();
+        var ret = cls.ValidateDocument(VTIN_VD_Document);
+        VTIN_VD_Response = "Type: "  + ret.Item1.ToString() + " - Valid: " + ret.Item2.ToString();
     }
 
 }
