@@ -6,6 +6,12 @@ qengy Validator - Project with classes that facilitate the validation of certain
 
 It is perfect for .NET developers who want to rapidly build web applications without having to struggle with CSS and Javascript. Using MudBlazor, being written entirely in C#, empowers you to adapt, fix or extend the framework.
 
+# Class with methods to facilitate the validation of fiscal identifiers in Spain
+
+- Function that based on the regex of document returns the type of document.
+- Function that validate the document is valid.
+- Function that calculate the NIF control letter.
+
 ## Demo
 - [validator.qengy.com](https://validator.qengy.com)
 
