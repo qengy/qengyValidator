@@ -50,7 +50,7 @@
         </MudItem>
     </MudGrid>
     <MudDivider />
-        <MudGrid Class="py-5">
+    <MudGrid Class="py-5">
         <MudItem xs="12" sm="12" md="4" Class="d-flex align-center">
             <MudPaper Elevation="0" Class="mud-width-full">
                 <MudText>Function that calculate the NIF control letter</MudText>
@@ -70,6 +70,32 @@
     <MudDivider />
 </MudContainer>
 
+<div Class="py-5 px-5 mud-theme-primary">
+    <MudText Typo="Typo.h5" Align="Align.Center" Color="Color.Dark"><b>Methods to validate the Universal Supply Point Code (CUPS) or POD(Point of Delivery) in Spain</b></MudText>
+</div>
+
+<MudContainer Class="py-5 px-5 mud-secondary">
+    <MudDivider/>
+    <MudGrid Class="py-5">
+        <MudItem xs="12" sm="12" md="4" Class="d-flex align-center">
+            <MudPaper Elevation="0" Class="mud-width-full">
+                <MudText>Function that validate CUPS</MudText>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="12" md="4">
+            <MudPaper Elevation="0" Class="mud-width-full">
+                <MudTextField @bind-Value="VC_VD_Document" Label="CUPS" Variant="Variant.Outlined" FullWidth="true" TextChanged="VC_VD_Text_Changed"></MudTextField>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="12" md="4" Class="d-flex align-center">
+            <MudPaper Elevation="0" Class="mud-width-full">
+                <MudText>@VC_VD_Response</MudText>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+    <MudDivider />
+</MudContainer>
+
 <div Class="py-10 px-5 mud-theme-primary">
     <MudImage Src="imgs/logo-mono.png" Width="50"></MudImage>
     <MudText Color="Color.Dark"><b>admin@qengy.com</b></MudText>
@@ -83,6 +109,8 @@
     public string? VTIN_VD_Response { get; set; }
     public string? VTIN_CCN_Document { get; set; }
     public string? VTIN_CCN_Response { get; set; }
+    public string? VC_VD_Document { get; set; }
+    public string? VC_VD_Response { get; set; }
 
 
     void VTIN_GDT_Text_Changed()
@@ -103,5 +131,12 @@
         clsValidateTaxIdentificationNumber cls = new clsValidateTaxIdentificationNumber();
         var ret = cls.CalculateControlNIF(VTIN_CCN_Document);
         VTIN_CCN_Response = "Type: "  + ret.Item1.ToString() + " - Letter Control: " + ret.Item2.ToString();
+    }
+    
+    void VC_VD_Text_Changed()
+    {
+        clsValidateCUPS cls = new clsValidateCUPS();
+        var ret = cls.ValidateDocument(VC_VD_Document);
+        VC_VD_Response = "Is Valid?: "  + ret.ToString();
     }
 }
