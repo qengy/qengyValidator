@@ -12,7 +12,7 @@ It is perfect for .NET developers who want to rapidly build web applications wit
 - Function that validate the document is valid.
 - Function that calculate the NIF control letter.
 
-# Class with methods to facilitate the validation of CUPS in Spain - https://es.wikipedia.org/wiki/C%C3%B3digo_Unificado_de_Punto_de_Suministro
+# Class with methods to facilitate the validation of CUPS in Spain
 
 - Function that validate the CUPS is valid
 
